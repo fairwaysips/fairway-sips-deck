@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fairway Sips — For Golf Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a1f18;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);--ink:#f2faf5;--ink2:#a8c4b5;--ink3:#6b8779;--green:#34c46f;--green-d:#15663f;--amber:#f5a524;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1100px 600px at 50% -10%,#14503a,transparent 60%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.011em;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  .hero{padding:80px 0 50px;text-align:center;}
+  .hero .mark{font-size:48px;}
+  .hero h1{font-size:clamp(30px,5.4vw,52px);font-weight:900;letter-spacing:-.03em;margin-top:16px;line-height:1.1;}
+  .hero h1 i{font-style:normal;color:var(--green);}
+  .hero p{max-width:640px;margin:18px auto 0;font-size:16.5px;line-height:1.65;color:var(--ink2);}
+  .cta{display:inline-block;margin-top:26px;background:linear-gradient(145deg,#22a05c,#15663f);color:#fff;font-weight:800;font-size:15.5px;padding:15px 30px;border-radius:16px;text-decoration:none;box-shadow:0 10px 26px rgba(21,102,63,.42);}
+  .cta2{display:inline-block;margin-top:26px;margin-left:10px;color:var(--ink);font-weight:700;font-size:15px;padding:15px 24px;border-radius:16px;text-decoration:none;border:1px solid var(--line);background:var(--panel);}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;padding:36px 0;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center;}
+  .stat .v{font-size:32px;font-weight:900;color:var(--green);}
+  .stat .l{font-size:13px;color:var(--ink2);font-weight:600;margin-top:6px;line-height:1.45;}
+
+  .sect{padding:54px 0 6px;text-align:center;}
+  .sect .eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green);}
+  .sect h2{font-size:clamp(24px,3.6vw,34px);font-weight:800;margin-top:8px;letter-spacing:-.02em;}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:30px 0;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:26px;text-align:left;}
+  .card .ico{font-size:30px;}
+  .card h3{font-size:17px;font-weight:800;margin-top:12px;}
+  .card p{font-size:14px;line-height:1.65;color:var(--ink2);margin-top:8px;}
+
+  .math{background:linear-gradient(145deg,rgba(52,196,111,.1),rgba(52,196,111,.02));border:1px solid rgba(52,196,111,.25);border-radius:24px;padding:34px;margin:40px 0;}
+  .math h3{font-size:20px;font-weight:800;}
+  .math .rows{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:15px;}
+  .math .r{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed rgba(255,255,255,.12);padding-bottom:10px;}
+  .math .r b{color:var(--green);}
+  .math .total{display:flex;justify-content:space-between;font-size:18px;font-weight:900;margin-top:6px;}
+  .math .total b{color:var(--amber);}
+  .math .fine{font-size:12px;color:var(--ink3);margin-top:14px;line-height:1.6;}
+
+  .foot{padding:60px 0 70px;text-align:center;color:var(--ink3);font-size:13px;line-height:1.9;}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="mark">⛳🍹</div>
+  <h1>Your beverage cart, <i>on demand.</i><br/>Every hole. Every golfer.</h1>
+  <p>
+    Fairway Sips turns your cart service into a delivery platform: golfers order from their phone,
+    your runners get dispatched like Uber drivers, and you watch revenue move hole-by-hole in real time.
+    No hardware. No app store. A QR code on the first tee.
+  </p>
+  <a class="cta" href="https://fairway-sips.vercel.app">Try the live demo</a>
+  <a class="cta2" href="https://fairway-sips.vercel.app/showcase">See every screen →</a>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="v">+38%</div><div class="l">typical F&amp;B lift when golfers can order anywhere on the course*</div></div>
+    <div class="stat"><div class="v">30 sec</div><div class="l">from "I'm thirsty" to order placed — no flagging down the cart</div></div>
+    <div class="stat"><div class="v">100%</div><div class="l">of alcohol deliveries gated by digital + in-person 21+ ID checks</div></div>
+    <div class="stat"><div class="v">$0</div><div class="l">hardware. Works in the phone browser via on-course QR codes</div></div>
+  </div>
+
+  <div class="sect">
+    <div class="eyebrow">Why courses switch</div>
+    <h2>The cart girl can't be everywhere. The app can.</h2>
+  </div>
+  <div class="grid3">
+    <div class="card"><div class="ico">📱</div><h3>Golfers order from anywhere</h3><p>Live menu, custom cocktail builder, tips built in, Stripe checkout. Orders route to the hole they're playing — they never leave their ball.</p></div>
+    <div class="card"><div class="ico">🛺</div><h3>Runners work like Uber drivers</h3><p>Closest free cart gets dispatched automatically. Chronological queue, one-tap accept, mandatory ID check on alcohol, earnings tracked per delivery.</p></div>
+    <div class="card"><div class="ico">📈</div><h3>You see everything, live</h3><p>Revenue, average delivery time, demand by hole, top sellers, your best clients, inventory toggles that hit golfer phones instantly.</p></div>
+  </div>
+
+  <div class="math">
+    <h3>The napkin math for an average course</h3>
+    <div class="rows">
+      <div class="r"><span>140 rounds/day × 35% order rate</span><b>≈ 49 orders/day</b></div>
+      <div class="r"><span>49 orders × $19 average ticket (incl. delivery fee + tip)</span><b>≈ $931/day</b></div>
+      <div class="r"><span>Season (200 playable days)</span><b>≈ $186,000/yr through the platform</b></div>
+    </div>
+    <div class="total"><span>Incremental F&amp;B revenue vs. cart-only service</span><b>$50–70k/yr</b></div>
+    <div class="fine">*Illustrative model based on on-demand F&amp;B adoption rates at comparable venues; every course's numbers differ. The manager dashboard shows you YOUR real numbers from day one.</div>
+  </div>
+
+  <div class="sect">
+    <div class="eyebrow">Rollout</div>
+    <h2>Live at your course in a week</h2>
+  </div>
+  <div class="grid3">
+    <div class="card"><div class="ico">1️⃣</div><h3>Menu &amp; map setup</h3><p>We load your menu, pricing, and satellite course map. You get the manager dashboard the same day.</p></div>
+    <div class="card"><div class="ico">2️⃣</div><h3>QR codes on the course</h3><p>Tee signs, scorecards, cart stickers. Golfers scan, order, play on. No download friction.</p></div>
+    <div class="card"><div class="ico">3️⃣</div><h3>Runners onboarded in minutes</h3><p>The runner app is one screen. If they've used Uber Eats, they already know it.</p></div>
+  </div>
+</div>
+
+<footer class="foot wrap">
+  ⛳ <b style="color:var(--ink)">Fairway Sips</b> · Never wait at the turn.<br/>
+  Demo: fairway-sips.vercel.app · Screens: /showcase · Contact: Jesse Rosenberg
+</footer>
+
+</body>
+</html>

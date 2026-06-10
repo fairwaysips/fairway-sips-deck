@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fairway Sips — Product Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a1f18;--bg2:#0d2a20;--panel:rgba(255,255,255,.05);--line:rgba(255,255,255,.1);
+    --ink:#f2faf5;--ink2:#a8c4b5;--ink3:#6b8779;
+    --green:#34c46f;--green-d:#15663f;--amber:#f5a524;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#14503a,transparent 60%),var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.011em;}
+  a{color:var(--green);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* hero */
+  .hero{padding:84px 0 60px;text-align:center;}
+  .hero .mark{font-size:54px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));}
+  .hero h1{font-size:clamp(36px,6vw,62px);font-weight:400;letter-spacing:.12em;margin-top:14px;}
+  .hero h1 b{font-weight:900;}
+  .hero .tag{font-size:clamp(16px,2.4vw,21px);color:var(--ink2);font-weight:600;margin-top:10px;}
+  .hero .sub{max-width:680px;margin:22px auto 0;font-size:15.5px;line-height:1.65;color:var(--ink2);}
+  .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+  .badge{padding:8px 16px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--ink);}
+  .badge b{color:var(--green);}
+
+  /* section headers */
+  .sect{padding:70px 0 10px;text-align:center;}
+  .sect .eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--green);}
+  .sect h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.02em;margin-top:8px;}
+  .sect p{max-width:640px;margin:12px auto 0;font-size:15px;line-height:1.6;color:var(--ink2);}
+
+  /* screen rows */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px 28px;padding:50px 0 30px;}
+  .frame-card{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .iphone{
+    position:relative;width:min(300px,78vw);aspect-ratio:390/844;border-radius:48px;
+    background:#000;padding:10px;
+    box-shadow:0 30px 80px rgba(0,0,0,.55),0 4px 18px rgba(0,0,0,.4),inset 0 0 0 2px #1c1c1e,inset 0 0 0 5px #3a3a3c;
+  }
+  .iphone .screen{width:100%;height:100%;border-radius:38px;overflow:hidden;background:#0a1f18;}
+  .iphone .screen img{width:100%;height:100%;object-fit:cover;display:block;}
+  .iphone .island{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:34%;height:24px;border-radius:999px;background:#000;z-index:2;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);}
+  .step{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;border-radius:999px;background:var(--green);color:#06281a;font-weight:900;font-size:13px;padding:0 9px;}
+  .cap{max-width:330px;text-align:center;}
+  .cap h3{font-size:17px;font-weight:800;margin-top:8px;}
+  .cap p{font-size:13.5px;line-height:1.6;color:var(--ink2);margin-top:6px;}
+  .cap .feat{margin-top:8px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--ink3);font-weight:600;}
+
+  /* flow divider strips */
+  .strip{margin-top:60px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(52,196,111,.08),transparent 60%);}
+  .strip .wrap{display:flex;gap:28px;flex-wrap:wrap;align-items:center;justify-content:center;padding:26px 24px;}
+  .strip .s{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--ink2);}
+  .strip .s b{color:var(--ink);}
+  .strip .s .ico{font-size:20px;}
+
+  .foot{padding:70px 0 60px;text-align:center;color:var(--ink3);font-size:13px;line-height:1.8;}
+  .foot a{font-weight:700;}
+  .cta{display:inline-block;margin-top:18px;background:linear-gradient(145deg,#22a05c,#15663f);color:#fff;font-weight:800;font-size:15px;padding:14px 28px;border-radius:16px;text-decoration:none;box-shadow:0 10px 26px rgba(21,102,63,.42);}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="mark">⛳</div>
+  <h1>FAIRWAY <b>SIPS</b></h1>
+  <div class="tag">Drinks. Delivered to your hole.</div>
+  <p class="sub">
+    On-demand beverage &amp; food delivery for golf courses. A golfer orders from their phone in
+    seconds, the closest cart runner is dispatched automatically, and the course tracks every
+    dollar in real time — three apps, one platform, zero waiting at the turn.
+  </p>
+  <div class="badges">
+    <span class="badge"><b>Golfer app</b> · order + live tracking</span>
+    <span class="badge"><b>Runner app</b> · dispatch + delivery</span>
+    <span class="badge"><b>Manager</b> · live revenue &amp; ops</span>
+    <span class="badge"><b>Stripe</b> payments ready</span>
+    <span class="badge"><b>Real satellite maps</b> · any course</span>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <span class="s"><span class="ico">📱</span><b>Order</b>&nbsp;in under 30 seconds</span>
+    <span class="s"><span class="ico">🛺</span><b>Auto-dispatch</b>&nbsp;to the closest runner</span>
+    <span class="s"><span class="ico">🛰️</span><b>Live tracking</b>&nbsp;on real satellite imagery</span>
+    <span class="s"><span class="ico">🪪</span><b>Built-in 21+</b>&nbsp;ID compliance</span>
+    <span class="s"><span class="ico">📈</span><b>Live revenue</b>&nbsp;per hole, per item, per client</span>
+  </div>
+</div>
+
+<!-- ───────────── GOLFER FLOW ───────────── -->
+<section class="wrap">
+  <div class="sect">
+    <div class="eyebrow">Flow 01 · The Golfer</div>
+    <h2>From thirsty to served — without leaving your ball</h2>
+    <p>The full guest experience, in order: load up, sign in, pick your course, order, pay, and watch it arrive.</p>
+  </div>
+  <div class="grid">
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/01-splash.jpg" alt="Splash" loading="lazy"></div></div>
+      <div class="cap"><span class="step">1</span><h3>Load-up Splash</h3>
+        <p>Netflix-style open over a cartoon course render — sunset, flag, and a cart rolling across while the app warms up.</p>
+        <div class="feat"><span>· Animated load bar + brand moment</span><span>· Fades straight into the live map</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/02-home-map.jpg" alt="Home map" loading="lazy"></div></div>
+      <div class="cap"><span class="step">2</span><h3>Live Course Map</h3>
+        <p>Real satellite imagery of YOUR course (Tesla-style), your pulsing GPS dot, and every cart runner moving live.</p>
+        <div class="feat"><span>· Apple-Maps-style glass chips &amp; controls</span><span>· Runner fleet status: “2 free · ~4 min”</span><span>· DoorDash-style order sheet below</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/03-course-picker.jpg" alt="Course picker" loading="lazy"></div></div>
+      <div class="cap"><span class="step">3</span><h3>Course Selection</h3>
+        <p>Pick a partner course or search any golf course on earth — the satellite map re-centers instantly.</p>
+        <div class="feat"><span>· Global course search (OpenStreetMap)</span><span>· Saved as your home course</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/04-login.jpg" alt="Sign in" loading="lazy"></div></div>
+      <div class="cap"><span class="step">4</span><h3>Sign In</h3>
+        <p>Glass auth card over the course backdrop. Email + password, forgot-password flow, or skip ahead as a guest.</p>
+        <div class="feat"><span>· Supabase Auth wired &amp; ready</span><span>· Guest mode keeps the demo frictionless</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/05-signup.jpg" alt="Create account" loading="lazy"></div></div>
+      <div class="cap"><span class="step">5</span><h3>Create Account</h3>
+        <p>Name, email, password — accounts sync orders across devices and unlock one-tap reorder.</p>
+        <div class="feat"><span>· Full name → personalized app</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/06-email-confirm.jpg" alt="Email confirmation" loading="lazy"></div></div>
+      <div class="cap"><span class="step">6</span><h3>Email Confirmation</h3>
+        <p>Clean “check your email” state after sign-up, with a guest path so nobody gets stuck at the gate.</p>
+        <div class="feat"><span>· Resend guidance built in</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/07-welcome.jpg" alt="Welcome" loading="lazy"></div></div>
+      <div class="cap"><span class="step">7</span><h3>Onboarding</h3>
+        <p>One screen, three promises: we find your hole, you order in seconds, it's dropped at your next tee.</p>
+        <div class="feat"><span>· Location permission ask</span><span>· 21+ notice up front</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/08-menu.jpg" alt="Menu" loading="lazy"></div></div>
+      <div class="cap"><span class="step">8</span><h3>Beverage Menu</h3>
+        <p>Live menu by category — whatever the manager publishes appears here instantly. GPS chip confirms your hole.</p>
+        <div class="feat"><span>· Beer · Cocktails · Snacks · N/A</span><span>· “Order again” one-tap re-add</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/09-drink-builder.jpg" alt="Drink builder" loading="lazy"></div></div>
+      <div class="cap"><span class="step">9</span><h3>Custom Drink Builder</h3>
+        <p>Signature feature: spirit → brand → shots → mixers → extras, with a live spec pill and live pricing.</p>
+        <div class="feat"><span>· Per-shot pricing logic</span><span>· Spec travels with the order to the runner</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/10-cart.jpg" alt="Cart" loading="lazy"></div></div>
+      <div class="cap"><span class="step">10</span><h3>Cart &amp; Tip</h3>
+        <p>Quantity controls, runner tip selector, and an honest receipt: subtotal, delivery fee, tip, total.</p>
+        <div class="feat"><span>· Tip presets ($0/$2/$3/$5)</span><span>· Delivery fee baked into revenue math</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/11-age-gate.jpg" alt="Age gate" loading="lazy"></div></div>
+      <div class="cap"><span class="step">11</span><h3>21+ Age Gate</h3>
+        <p>Alcohol in the cart triggers the compliance gate — and the runner is required to re-verify ID in person.</p>
+        <div class="feat"><span>· Two-layer compliance (order + delivery)</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/12-checkout.jpg" alt="Checkout" loading="lazy"></div></div>
+      <div class="cap"><span class="step">12</span><h3>Checkout</h3>
+        <p>Stripe-powered payment sheet. Today it runs a polished demo card; add Stripe keys and real cards flow with zero code changes.</p>
+        <div class="feat"><span>· PaymentIntent API already live</span><span>· Apple Pay-style demo fallback</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/13-tracking-live.jpg" alt="Live tracking" loading="lazy"></div></div>
+      <div class="cap"><span class="step">13</span><h3>Live Tracking</h3>
+        <p>Real order, real status. Satellite map of your hole, your assigned runner by name, and a stepper that updates as the runner moves.</p>
+        <div class="feat"><span>· Polls the live order every 3s</span><span>· Countdown ETA · receipt with fees &amp; tip</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/14-account.jpg" alt="Account" loading="lazy"></div></div>
+      <div class="cap"><span class="step">14</span><h3>Account Hub</h3>
+        <p>Profile, home course, course history, full order history with one-tap reorder, password change and sign-out.</p>
+        <div class="feat"><span>· Lifetime spend + order stats</span><span>· Reorder drops you straight into checkout</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── RUNNER FLOW ───────────── -->
+<section class="wrap">
+  <div class="sect">
+    <div class="eyebrow">Flow 02 · The Cart Runner</div>
+    <h2>An Uber-Eats-grade delivery app for the beverage cart</h2>
+    <p>Orders are auto-dispatched to the closest free runner and worked chronologically — current delivery up top, new orders below, earnings always visible.</p>
+  </div>
+  <div class="grid">
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/15-runner-queue.jpg" alt="Runner queue" loading="lazy"></div></div>
+      <div class="cap"><span class="step">1</span><h3>Order Queue</h3>
+        <p>New orders chronologically, oldest flagged urgent. Every card shows hole, golfer, items, payout and a one-tap accept.</p>
+        <div class="feat"><span>· Closest-runner auto-assignment</span><span>· 🪪 badge flags alcohol orders</span><span>· Bottom bar: new / on-the-way / earnings</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/16-runner-active.jpg" alt="Active delivery" loading="lazy"></div></div>
+      <div class="cap"><span class="step">2</span><h3>Active Delivery</h3>
+        <p>Hero card with the route to the hole, animated progress, order contents and the single next action.</p>
+        <div class="feat"><span>· One delivery in focus at a time</span><span>· Items list = packing list</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/17-runner-id-check.jpg" alt="ID check" loading="lazy"></div></div>
+      <div class="cap"><span class="step">3</span><h3>Mandatory ID Check</h3>
+        <p>Alcohol can't be marked delivered without the runner confirming a valid 21+ ID — with a refuse-service path that cancels the charge.</p>
+        <div class="feat"><span>· ID result logged on the order</span><span>· Refusal = no charge, full audit trail</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/18-runner-complete.jpg" alt="Completed" loading="lazy"></div></div>
+      <div class="cap"><span class="step">4</span><h3>Done &amp; Earning</h3>
+        <p>Completed orders archive with ID-check receipts, and the earnings counter ticks up with every drop (base + tips).</p>
+        <div class="feat"><span>· Per-delivery payout + tip tracking</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── MANAGER FLOW ───────────── -->
+<section class="wrap">
+  <div class="sect">
+    <div class="eyebrow">Flow 03 · The Course Manager</div>
+    <h2>The whole operation on one screen — live</h2>
+    <p>Every order placed anywhere on the course moves these numbers in real time: revenue, demand by hole, top sellers, clients, inventory and the live feed.</p>
+  </div>
+  <div class="grid">
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/19-manager-top.jpg" alt="Manager metrics" loading="lazy"></div></div>
+      <div class="cap"><span class="step">1</span><h3>Revenue &amp; Timing</h3>
+        <p>Revenue today, order count, average ticket and real average delivery time — computed from actual deliveries, not estimates.</p>
+        <div class="feat"><span>· Live math: every order updates it</span><span>· Week-over-week trends</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/20-manager-insights.jpg" alt="Demand heatmap" loading="lazy"></div></div>
+      <div class="cap"><span class="step">2</span><h3>18-Hole Demand Heatmap</h3>
+        <p>Where the orders come from, hole by hole — position carts before the rush instead of after it.</p>
+        <div class="feat"><span>· Live: new orders light up their hole</span><span>· Top sellers ranked beneath</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/21-manager-clients.jpg" alt="Clients & inventory" loading="lazy"></div></div>
+      <div class="cap"><span class="step">3</span><h3>Clients &amp; Inventory</h3>
+        <p>Who's ordering today and what they're worth, plus a live inventory board — toggle any item and the golfer menu updates instantly.</p>
+        <div class="feat"><span>· Client spend leaderboard</span><span>· 12/12 items live indicator</span></div></div>
+    </div>
+    <div class="frame-card">
+      <div class="iphone"><span class="island"></span><div class="screen"><img src="shots/22-manager-live-menu.jpg" alt="Live orders & menu" loading="lazy"></div></div>
+      <div class="cap"><span class="step">4</span><h3>Live Feed &amp; Menu Control</h3>
+        <p>Every order streaming in with status pills, and full menu management: add items, reprice, hide, remove — all live to golfers.</p>
+        <div class="feat"><span>· 3-second live polling</span><span>· Price changes hit phones instantly</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot wrap">
+  <div>⛳ <b style="color:var(--ink)">Fairway Sips</b> · built &amp; shipped overnight · golfer + runner + manager on one platform</div>
+  <div>Stripe payments, accounts &amp; database are pre-wired — they switch on the moment the keys are added.</div>
+  <a class="cta" href="https://fairway-sips.vercel.app">Open the live app →</a>
+</footer>
+
+</body>
+</html>
