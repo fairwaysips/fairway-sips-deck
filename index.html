@@ -1,1 +1,111 @@
-<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=showcase/"><title>Fairway Sips</title></head><body></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairway Sips — Everything</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; }
+  :root { --green:#3ddc6e; --bg:#050505; --card:#141414; --card2:#1c1c1c; --border:#262626; --dim:#8a8a8a; }
+  body { background:var(--bg); color:#fff; min-height:100vh; }
+  .wrap { max-width:760px; margin:0 auto; padding:48px 20px 80px; }
+  h1 { font-size:34px; font-weight:800; letter-spacing:-.4px; }
+  .tag { color:var(--dim); font-size:15px; margin-top:8px; line-height:1.5; }
+  .tag b { color:var(--green); }
+  h2 { font-size:13px; font-weight:700; letter-spacing:2.6px; color:var(--dim); margin:40px 0 14px; text-transform:uppercase; }
+  a.card { display:flex; align-items:center; gap:16px; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:18px 20px; text-decoration:none; color:#fff; margin-bottom:12px; transition:border-color .15s; }
+  a.card:hover { border-color:var(--green); }
+  .emoji { font-size:26px; width:48px; height:48px; border-radius:14px; background:var(--card2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; flex:none; }
+  .t { font-size:16.5px; font-weight:700; }
+  .d { font-size:13.5px; color:var(--dim); margin-top:4px; line-height:1.45; }
+  .arrow { margin-left:auto; color:var(--dim); font-size:18px; flex:none; }
+  .badge { display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:99px; margin-left:8px; vertical-align:2px; }
+  .badge.live { background:rgba(61,220,110,.15); color:var(--green); border:1px solid rgba(61,220,110,.4); }
+  .badge.warn { background:rgba(245,185,66,.12); color:#f5b942; border:1px solid rgba(245,185,66,.4); }
+  .badge.lock { background:var(--card2); color:var(--dim); border:1px solid var(--border); }
+  .sheets { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .sheets a { display:block; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--card); text-decoration:none; color:#fff; }
+  .sheets a:hover { border-color:var(--green); }
+  .sheets img { width:100%; display:block; aspect-ratio:9/19.5; object-fit:cover; object-position:top; }
+  .sheets .cap { font-size:12px; font-weight:600; color:#ddd; padding:10px 12px; }
+  .foot { color:#3f3f3f; font-size:12.5px; margin-top:48px; text-align:center; }
+  @media (max-width:560px){ .sheets { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⛳ Fairway Sips</h1>
+  <div class="tag">Everything in one place — app, decks, designs, business docs.<br>Drinks delivered to your hole, tracked live.</div>
+
+  <h2>The App</h2>
+  <a class="card" href="https://fairway-sips.vercel.app">
+    <div class="emoji">📱</div>
+    <div><div class="t">Live app <span class="badge warn">older build</span></div>
+    <div class="d">fairway-sips.vercel.app — golfer, runner &amp; manager apps. Newest build ships once Vercel account is verified.</div></div>
+    <div class="arrow">→</div>
+  </a>
+
+  <h2>Decks &amp; Pitch</h2>
+  <a class="card" href="showcase/">
+    <div class="emoji">🎞️</div>
+    <div><div class="t">Showcase deck <span class="badge live">live</span></div>
+    <div class="d">All 22 iPhone screens of the real app, flow by flow, each one explained.</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="pitch/">
+    <div class="emoji">💼</div>
+    <div><div class="t">Course-owner pitch <span class="badge live">live</span></div>
+    <div class="d">The sales page for golf course GMs — revenue math, how it works, pilot offer.</div></div>
+    <div class="arrow">→</div>
+  </a>
+
+  <h2>Design Mockups</h2>
+  <div class="sheets">
+    <a href="design/sheet-1-golfer-core.jpg"><img src="design/sheet-1-golfer-core.jpg" alt="Golfer core screens"><div class="cap">Golfer · core 4<br><span style="color:var(--dim)">Order · Builder · Tracking · Checkout</span></div></a>
+    <a href="design/sheet-2-golfer-new.png"><img src="design/sheet-2-golfer-new.png" alt="Golfer new screens"><div class="cap">Golfer · new 4<br><span style="color:var(--dim)">Home · Course Picker · Confirmed · Activity</span></div></a>
+    <a href="design/sheet-3-staff.png"><img src="design/sheet-3-staff.png" alt="Staff screens"><div class="cap">Staff · 4<br><span style="color:var(--dim)">Queue · Route · ID Check · Manager</span></div></a>
+  </div>
+
+  <h2>Business &amp; Models <span class="badge lock">private — GitHub login</span></h2>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/business/BUSINESS-PLAN.md">
+    <div class="emoji">📈</div>
+    <div><div class="t">Business plan</div><div class="d">Full plan — market, model, competition, roadmap.</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/business/FINANCIAL-MODEL.md">
+    <div class="emoji">📊</div>
+    <div><div class="t">Financial model</div><div class="d">Revenue projections + the numbers behind the pitch (CSV included in repo).</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/business/GO-TO-MARKET.md">
+    <div class="emoji">🚀</div>
+    <div><div class="t">Go-to-market</div><div class="d">Launch strategy, verticals, course sales playbook.</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/business/LEGAL-NEVADA.md">
+    <div class="emoji">⚖️</div>
+    <div><div class="t">Legal — Nevada</div><div class="d">Licensing research: why the course's liquor license covers delivery.</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/business/WHO-TO-CONTACT.md">
+    <div class="emoji">📇</div>
+    <div><div class="t">Who to contact</div><div class="d">Outreach targets — Siena GC + the first-call list.</div></div>
+    <div class="arrow">→</div>
+  </a>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips/blob/main/JESSE-TODO.md">
+    <div class="emoji">✅</div>
+    <div><div class="t">Jesse's launch to-do</div><div class="d">Stripe keys + Supabase keys (~25 min) — the two launch blockers.</div></div>
+    <div class="arrow">→</div>
+  </a>
+
+  <h2>Code</h2>
+  <a class="card" href="https://github.com/jesserosenbergcg/fairway-sips">
+    <div class="emoji">🧑‍💻</div>
+    <div><div class="t">App repo <span class="badge lock">private</span></div><div class="d">github.com/jesserosenbergcg/fairway-sips — Next.js + Supabase + Stripe.</div></div>
+    <div class="arrow">→</div>
+  </a>
+
+  <div class="foot">Fairway Sips · updated June 10, 2026</div>
+</div>
+</body>
+</html>
