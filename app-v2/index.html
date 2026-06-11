@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fairway Sips — Design v2 Demo</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; -webkit-tap-highlight-color:transparent; }
+  :root { --green:#3ddc6e; --greendark:#04230f; --bg:#050505; --screen:#0b0b0b; --card:#161616; --card2:#1c1c1c; --border:#262626; --dim:#8a8a8a; --dim2:#5c5c5c; --amber:#f5b942; }
+  html,body { background:var(--bg); color:#fff; height:100%; }
+  /* desktop shell */
+  .shell { min-height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; padding:30px 0; }
+  .shell-note { color:var(--dim2); font-size:12.5px; letter-spacing:2px; font-weight:700; }
+  .phone { width:392px; background:#101010; border:1px solid #2a2a2a; border-radius:52px; padding:12px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  .device { background:var(--screen); border-radius:42px; height:846px; overflow:hidden; position:relative; display:flex; flex-direction:column; }
+  @media (max-width:560px) {
+    .shell { padding:0; display:block; }
+    .shell-note { display:none; }
+    .phone { width:100%; border:none; border-radius:0; padding:0; box-shadow:none; }
+    .device { border-radius:0; height:100vh; height:100dvh; }
+  }
+  body.embed .shell { padding:0; display:block; }
+  body.embed .shell-note { display:none; }
+  body.embed .phone { width:100%; border:none; border-radius:0; padding:0; box-shadow:none; }
+  body.embed .device { border-radius:0; height:100vh; }
+
+  .statusbar { display:flex; justify-content:space-between; font-size:13.5px; font-weight:600; color:#ddd; padding:16px 26px 0; flex:none; }
+  .screens { flex:1; position:relative; overflow:hidden; }
+  .screen { position:absolute; inset:0; padding:18px 20px 0; display:none; flex-direction:column; overflow-y:auto; scrollbar-width:none; }
+  .screen::-webkit-scrollbar { display:none; }
+  .screen.active { display:flex; }
+
+  .header { display:flex; align-items:center; gap:10px; margin-top:6px; flex:none; }
+  .header .title { font-size:18px; font-weight:700; flex:1; }
+  .chip { font-size:12px; font-weight:600; color:#ccc; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:7px 13px; display:inline-flex; align-items:center; gap:6px; }
+  .dot { width:7px; height:7px; border-radius:50%; background:var(--green); display:inline-block; }
+  .iconsq { width:30px; height:30px; border-radius:9px; background:var(--card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:15px; flex:none; }
+  .back { width:34px; height:34px; border-radius:50%; background:var(--card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; color:#ddd; cursor:pointer; flex:none; }
+  .sec { font-size:11.5px; font-weight:700; letter-spacing:2.4px; color:var(--dim); margin:20px 0 10px; flex:none; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:16px; }
+  .pillbtn { background:var(--green); color:var(--greendark); font-size:16px; font-weight:800; border-radius:999px; padding:16px; text-align:center; cursor:pointer; user-select:none; flex:none; }
+  .pillbtn:active { transform:scale(.98); }
+  .ghostbtn { background:var(--card); border:1px solid var(--border); color:#eee; font-size:15px; font-weight:700; border-radius:999px; padding:14px; text-align:center; cursor:pointer; user-select:none; flex:none; }
+  .spacer { flex:1; min-height:12px; }
+
+  /* tab bar */
+  .tabs { display:flex; border-top:1px solid #1d1d1d; padding:10px 8px calc(10px + env(safe-area-inset-bottom)); flex:none; background:var(--screen); }
+  .tab { flex:1; text-align:center; color:var(--dim2); font-size:11px; font-weight:600; position:relative; cursor:pointer; }
+  .tab .ti { font-size:19px; display:block; margin-bottom:3px; filter:grayscale(1) brightness(.7); }
+  .tab.active { color:var(--green); }
+  .tab.active .ti { filter:none; }
+
+  /* map */
+  .map { border-radius:20px; background:
+      radial-gradient(120px 90px at 75% 22%, rgba(61,220,110,.16), transparent 70%),
+      radial-gradient(160px 120px at 22% 70%, rgba(61,220,110,.22), transparent 70%),
+      linear-gradient(160deg, #0e1d13, #0a120d 60%, #081009);
+      position:relative; overflow:hidden; border:1px solid #1d2a20; flex:none; }
+  .gridlines { position:absolute; inset:0;
+      background-image:linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:46px 46px; }
+  .fairway { position:absolute; background:rgba(61,220,110,.10); border:1px solid rgba(61,220,110,.18); border-radius:50%; }
+  .pin { position:absolute; width:15px; height:15px; border-radius:50%; border:3px solid #06140b; }
+  .pin.runner { background:var(--green); box-shadow:0 0 0 6px rgba(61,220,110,.18); }
+  .pin.you { background:#fff; box-shadow:0 0 0 6px rgba(255,255,255,.14); }
+  .maptag { position:absolute; font-size:10.5px; font-weight:700; color:#cfe9d8; background:rgba(8,16,10,.85); border:1px solid rgba(61,220,110,.25); padding:4px 8px; border-radius:7px; white-space:nowrap; }
+
+  /* compact menu rows */
+  .menurow { display:flex; align-items:center; gap:11px; padding:11px 12px; border-bottom:1px solid #1e1e1e; }
+  .menurow:last-child { border-bottom:none; }
+  .menurow .em { width:34px; height:34px; border-radius:10px; background:var(--card2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; flex:none; }
+  .menurow .nm { font-size:14px; font-weight:700; }
+  .menurow .ds { font-size:11.5px; color:var(--dim); margin-top:2px; }
+  .menurow .pr { font-size:13.5px; font-weight:700; margin-left:auto; color:#ddd; }
+  .addbtn { width:27px; height:27px; border-radius:8px; background:var(--card2); border:1px solid #2e2e2e; color:#ddd; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; cursor:pointer; flex:none; user-select:none; }
+  .addbtn.added { background:var(--green); color:var(--greendark); border-color:var(--green); }
+  .cats { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; flex:none; margin-top:14px; }
+  .cats::-webkit-scrollbar { display:none; }
+  .cat { font-size:12.5px; font-weight:700; color:#ccc; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:8px 15px; cursor:pointer; white-space:nowrap; user-select:none; }
+  .cat.active { background:#fff; color:#000; border-color:#fff; }
+  .search { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:12px 15px; color:var(--dim); font-size:13.5px; display:flex; gap:9px; align-items:center; margin-top:14px; flex:none; }
+
+  /* floating cart bar */
+  .cartbar { position:absolute; left:16px; right:16px; bottom:14px; background:#fff; color:#000; border-radius:999px; padding:15px 20px; display:none; align-items:center; gap:12px; font-weight:800; font-size:15px; cursor:pointer; box-shadow:0 12px 36px rgba(0,0,0,.5); }
+  .cartbar .ct { background:#000; color:#fff; font-size:12px; width:24px; height:24px; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+  .cartbar .tt { margin-left:auto; }
+
+  /* builder */
+  .opts { display:flex; flex-wrap:wrap; gap:8px; }
+  .opt { font-size:13px; font-weight:700; color:#ccc; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:9px 16px; cursor:pointer; user-select:none; }
+  .opt.sel { color:var(--green); border-color:rgba(61,220,110,.6); background:rgba(61,220,110,.08); }
+  .buildrow { display:flex; justify-content:space-between; padding:9px 0; font-size:14px; color:#ddd; border-bottom:1px solid #222; }
+  .buildrow:last-child { border-bottom:none; }
+  .buildrow span:last-child { color:var(--dim); }
+
+  /* checkout / lists */
+  .linerow { display:flex; justify-content:space-between; padding:12px 16px; font-size:14px; border-bottom:1px solid #1f1f1f; }
+  .linerow:last-child { border-bottom:none; }
+  .linerow .l { color:#ddd; } .linerow .r { font-weight:700; }
+  .linerow.total { font-size:16px; font-weight:800; }
+  .biground { width:80px; height:80px; border-radius:50%; background:rgba(61,220,110,.13); border:1.5px solid rgba(61,220,110,.45); display:flex; align-items:center; justify-content:center; font-size:36px; color:var(--green); margin:26px auto 0; flex:none; }
+  .runnercard { display:flex; align-items:center; gap:12px; padding:13px 15px; }
+  .runnercard .av { width:42px; height:42px; border-radius:12px; background:var(--card2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:19px; }
+  .progress { height:6px; background:#222; border-radius:99px; overflow:hidden; }
+  .progress > div { height:100%; background:var(--green); border-radius:99px; width:35%; transition:width 1s linear; }
+  .steps { display:flex; flex-direction:column; gap:12px; }
+  .step { display:flex; gap:11px; align-items:center; font-size:14px; font-weight:600; color:var(--dim2); }
+  .step .sd { width:9px; height:9px; border-radius:50%; background:#2c2c2c; flex:none; }
+  .step.done { color:#ddd; } .step.done .sd { background:var(--green); }
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="shell-note">FAIRWAY SIPS · DESIGN V2 · INTERACTIVE</div>
+  <div class="phone"><div class="device">
+    <div class="statusbar"><span>9:41</span><span>5G · 100%</span></div>
+    <div class="screens">
+
+      <!-- HOME -->
+      <div class="screen active" id="s-home">
+        <div class="header">
+          <div class="iconsq">⛳</div>
+          <div class="title">Fairway Sips</div>
+          <div class="chip"><span class="dot"></span>Hole 7</div>
+        </div>
+        <div class="map" style="height:300px; margin-top:14px;">
+          <div class="gridlines"></div>
+          <div class="fairway" style="width:190px;height:90px;left:-30px;top:150px;transform:rotate(-18deg);"></div>
+          <div class="fairway" style="width:170px;height:80px;right:-20px;top:26px;transform:rotate(14deg);"></div>
+          <div class="pin runner" style="left:74px;top:186px;"></div>
+          <div class="pin runner" style="right:96px;top:74px;"></div>
+          <div class="pin you" style="left:208px;top:132px;"></div>
+          <div class="maptag" style="left:96px;top:162px;">Marcus · 4 min</div>
+          <div class="maptag" style="right:36px;top:100px;">Dana · 9 min</div>
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:14px;"><div class="chip"><span class="dot"></span>3 runners on course · 2 free · ~4 min</div></div>
+        <div class="pillbtn" style="margin-top:14px;" onclick="go('menu','order')">Order to my hole&nbsp;&nbsp;→</div>
+        <div class="sec">QUICK REORDER</div>
+        <div class="card">
+          <div class="menurow"><div class="em">🍹</div><div><div class="nm">Transfusion</div><div class="ds">Your usual</div></div><div class="pr">$11</div><div class="addbtn" onclick="addItem(this,'Transfusion',11)">+</div></div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+
+      <!-- MENU -->
+      <div class="screen" id="s-menu">
+        <div class="header">
+          <div class="iconsq">⛳</div>
+          <div class="title">Menu</div>
+          <div class="chip"><span class="dot"></span>Hole 7 · Live</div>
+        </div>
+        <div class="search">⌕&nbsp; Search drinks, snacks…</div>
+        <div class="cats" id="cats"></div>
+        <div class="card" style="margin-top:12px; flex:none;" id="menulist"></div>
+        <div style="height:84px; flex:none;"></div>
+      </div>
+
+      <!-- BUILDER -->
+      <div class="screen" id="s-builder">
+        <div class="header">
+          <div class="back" onclick="go('menu','order')">←</div>
+          <div class="title">Build your drink</div>
+          <div class="chip">Step 2 of 4</div>
+        </div>
+        <div class="sec">SPIRIT</div>
+        <div class="opts" data-group="spirit"></div>
+        <div class="sec">BRAND</div>
+        <div class="opts" data-group="brand"></div>
+        <div class="sec">MIXER</div>
+        <div class="opts" data-group="mixer"></div>
+        <div class="sec">YOUR BUILD</div>
+        <div class="card" style="padding:6px 16px;">
+          <div class="buildrow"><span id="b-line1">Don Julio Blanco</span><span>2 oz</span></div>
+          <div class="buildrow"><span id="b-line2">Soda water</span><span>4 oz</span></div>
+          <div class="buildrow"><span>Fresh lime</span><span>—</span></div>
+        </div>
+        <div class="spacer"></div>
+        <div class="pillbtn" style="margin-bottom:14px;" onclick="addBuild()">Add to cart&nbsp;&nbsp;·&nbsp;&nbsp;$<span id="b-price">13.00</span></div>
+      </div>
+
+      <!-- CHECKOUT -->
+      <div class="screen" id="s-checkout">
+        <div class="header">
+          <div class="back" onclick="go('menu','order')">←</div>
+          <div class="title">Checkout</div>
+          <div class="chip"><span class="dot"></span>Hole 7</div>
+        </div>
+        <div class="card" style="margin-top:14px;" id="cartlines"></div>
+        <div class="card" style="margin-top:12px;">
+          <div class="runnercard"><div class="av">📍</div><div><div style="font-size:14px;font-weight:700;">Auto-deliver to Hole 8</div><div style="font-size:12px;color:var(--dim);margin-top:2px;">GPS-tracked · updates as you move</div></div></div>
+        </div>
+        <div class="spacer"></div>
+        <div style="font-size:11.5px;color:var(--dim2);text-align:center;margin-bottom:10px;">🔒 Secure checkout · 21+ ID verified on delivery</div>
+        <div class="pillbtn" style="background:#fff;color:#000;margin-bottom:14px;" onclick="pay()">Pay&nbsp;&nbsp;$<span id="paytotal">0.00</span></div>
+      </div>
+
+      <!-- CONFIRMED / TRACKING -->
+      <div class="screen" id="s-tracking">
+        <div class="biground">✓</div>
+        <div style="text-align:center;font-size:21px;font-weight:800;margin-top:14px;flex:none;">Order confirmed!</div>
+        <div style="text-align:center;font-size:13px;color:var(--dim);margin-top:5px;flex:none;">Marcus grabbed it</div>
+        <div class="card" style="margin-top:18px;padding:16px;flex:none;">
+          <div style="display:flex;align-items:baseline;gap:7px;">
+            <span style="font-size:30px;font-weight:800;" id="eta">6</span><span style="font-size:13px;color:var(--dim);">min</span>
+            <span style="margin-left:auto;font-size:12.5px;color:var(--green);font-weight:700;">Heading to Hole 8</span>
+          </div>
+          <div class="progress" style="margin-top:12px;"><div id="pbar"></div></div>
+        </div>
+        <div class="card" style="margin-top:12px;flex:none;">
+          <div class="runnercard"><div class="av">🛺</div><div><div style="font-size:14px;font-weight:700;">Marcus · Beverage Cart</div><div style="font-size:12px;color:var(--dim);margin-top:2px;">★ 4.9 · 320 deliveries</div></div>
+          <div style="margin-left:auto;" class="chip">Message</div></div>
+        </div>
+        <div class="sec">STATUS</div>
+        <div class="steps">
+          <div class="step done"><div class="sd"></div>Order confirmed</div>
+          <div class="step done"><div class="sd"></div>Drinks prepared</div>
+          <div class="step done"><div class="sd"></div>Out for delivery</div>
+          <div class="step" id="laststep"><div class="sd"></div>Arriving at your tee box</div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+
+      <!-- ACTIVITY -->
+      <div class="screen" id="s-activity">
+        <div class="header">
+          <div class="iconsq">⛳</div>
+          <div class="title">Activity</div>
+          <div class="chip"><span class="dot"></span>Hole 7</div>
+        </div>
+        <div style="display:flex;gap:9px;margin-top:14px;flex:none;">
+          <div class="card" style="flex:1;padding:13px 8px;text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--green);">12</div><div style="font-size:10.5px;color:var(--dim);margin-top:3px;font-weight:600;">orders</div></div>
+          <div class="card" style="flex:1;padding:13px 8px;text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--green);">4 min</div><div style="font-size:10.5px;color:var(--dim);margin-top:3px;font-weight:600;">avg delivery</div></div>
+          <div class="card" style="flex:1;padding:13px 8px;text-align:center;"><div style="font-size:18px;font-weight:800;color:var(--green);">$214</div><div style="font-size:10.5px;color:var(--dim);margin-top:3px;font-weight:600;">this season</div></div>
+        </div>
+        <div class="sec">TODAY · SIENA GC</div>
+        <div class="card">
+          <div class="menurow"><div class="em">🍹</div><div><div class="nm">Transfusion + custom</div><div class="ds"><span style="color:var(--green);font-weight:700;">On the way</span> · Hole 8</div></div><div class="pr">$28.18</div></div>
+          <div class="menurow"><div class="em">🍺</div><div><div class="nm">2× Bud Light</div><div class="ds">Delivered · Hole 3</div></div><div class="pr">$14.50</div><div class="addbtn" onclick="addItem(this,'2× Bud Light',14.5)">+</div></div>
+        </div>
+        <div class="sec">SATURDAY</div>
+        <div class="card">
+          <div class="menurow"><div class="em">🥃</div><div><div class="nm">Tito's &amp; Soda · 2 rounds</div><div class="ds">Delivered · Hole 11</div></div><div class="pr">$26.40</div><div class="addbtn" onclick="addItem(this,&quot;Tito's &amp; Soda ×2&quot;,26.4)">+</div></div>
+          <div class="menurow"><div class="em">🌭</div><div><div class="nm">Turn dogs ×4</div><div class="ds">Delivered · Hole 9</div></div><div class="pr">$22.00</div><div class="addbtn" onclick="addItem(this,'Turn dogs ×4',22)">+</div></div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+
+      <!-- ACCOUNT -->
+      <div class="screen" id="s-account">
+        <div class="header">
+          <div class="iconsq">👤</div>
+          <div class="title">Account</div>
+          <div class="chip">Siena GC</div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+          <div class="runnercard"><div class="av">⛳</div><div><div style="font-size:15px;font-weight:700;">Jesse R.</div><div style="font-size:12px;color:var(--dim);margin-top:2px;">Member since June 2026 · ID verified ✓</div></div></div>
+        </div>
+        <div class="sec">SETTINGS</div>
+        <div class="card">
+          <div class="linerow"><span class="l">💳 Payment · Apple Pay</span><span class="r" style="color:var(--dim);">›</span></div>
+          <div class="linerow"><span class="l">📍 Home course · Siena GC</span><span class="r" style="color:var(--dim);">›</span></div>
+          <div class="linerow"><span class="l">🔔 Notifications</span><span class="r" style="color:var(--green);">On</span></div>
+          <div class="linerow"><span class="l">🧾 Receipts &amp; history</span><span class="r" style="color:var(--dim);">›</span></div>
+        </div>
+        <div class="spacer"></div>
+      </div>
+
+      <!-- floating cart -->
+      <div class="cartbar" id="cartbar" onclick="openCheckout()"><div class="ct" id="cartcount">0</div>View cart<div class="tt">$<span id="carttotal">0.00</span></div></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="map" onclick="go('home','map')"><span class="ti">🗺️</span>Map</div>
+      <div class="tab" data-tab="order" onclick="go('menu','order')"><span class="ti">🍺</span>Order</div>
+      <div class="tab" data-tab="activity" onclick="go('activity','activity')"><span class="ti">🔔</span>Activity</div>
+      <div class="tab" data-tab="account" onclick="go('account','account')"><span class="ti">👤</span>Account</div>
+    </div>
+  </div></div>
+  <div class="shell-note">TAP AROUND — IT WORKS</div>
+</div>
+
+<script>
+if (location.search.includes('embed')) document.body.classList.add('embed');
+
+const MENU = {
+  'All': null,
+  'Beer': [['🍺','Bud Light','Lager · 12oz ice cold',6],['🍺','Corona','Lager · 12oz bottle',7],['🥤','Truly Wild Berry','Hard seltzer · 12oz',7],['🍺','Michelob Ultra','Light lager · 12oz',6]],
+  'Cocktails': [['🍹','Transfusion','The course classic',11],['🥃',"Tito's & Soda",'Double · lime',12],['🍸','Margarita','House tequila · rocks',12],['🍋','John Daly','Spiked Arnold Palmer',10]],
+  'Snacks': [['🌭','Turn Dog','All-beef · grilled at the turn',6],['🥨','Chips','Kettle-cooked',4],['🥜','Trail Mix','Sweet & salty',5]],
+  'N/A': [['💧','Water','Ice cold bottle',3],['⚡','Gatorade','Lemon-lime',5],['🪽','Red Bull','8.4oz',6]]
+};
+let cart = [], activeCat = 'All';
+
+function renderCats(){
+  const el = document.getElementById('cats');
+  el.innerHTML = '';
+  Object.keys(MENU).forEach(c=>{
+    const d = document.createElement('div');
+    d.className = 'cat'+(c===activeCat?' active':'');
+    d.textContent = c;
+    d.onclick = ()=>{ activeCat=c; renderCats(); renderMenu(); };
+    el.appendChild(d);
+  });
+}
+function items(){ return activeCat==='All' ? Object.values(MENU).filter(Boolean).flat() : MENU[activeCat]; }
+function renderMenu(){
+  const el = document.getElementById('menulist');
+  el.innerHTML = '';
+  const build = document.createElement('div');
+  build.className='menurow'; build.style.cursor='pointer';
+  build.innerHTML = '<div class="em" style="background:rgba(61,220,110,.12);border-color:rgba(61,220,110,.35);">＋</div><div><div class="nm">Build your own drink</div><div class="ds">Spirit, mixers, the works</div></div><div class="pr" style="color:var(--green);">→</div>';
+  build.onclick = ()=>go('builder','order');
+  el.appendChild(build);
+  items().forEach(([em,nm,ds,pr])=>{
+    const d = document.createElement('div');
+    d.className='menurow';
+    d.innerHTML = `<div class="em">${em}</div><div><div class="nm">${nm}</div><div class="ds">${ds}</div></div><div class="pr">$${pr}</div>`;
+    const a = document.createElement('div'); a.className='addbtn'; a.textContent='+';
+    a.onclick = ()=>addItem(a,nm,pr);
+    d.appendChild(a);
+    el.appendChild(d);
+  });
+}
+function addItem(btn,name,price){
+  cart.push([name,price]);
+  btn.classList.add('added'); btn.textContent='✓';
+  setTimeout(()=>{ btn.classList.remove('added'); btn.textContent='+'; },900);
+  updateCart();
+}
+function updateCart(){
+  const bar = document.getElementById('cartbar');
+  const t = cart.reduce((s,i)=>s+i[1],0);
+  document.getElementById('cartcount').textContent = cart.length;
+  document.getElementById('carttotal').textContent = t.toFixed(2);
+  bar.style.display = cart.length ? 'flex' : 'none';
+}
+const BUILDS = {
+  spirit: [['Vodka',0],['Tequila',1],['Whiskey',1],['Gin',0],['Rum',0]],
+  brand: [['Don Julio',2],['Patrón',3],['Casamigos',3]],
+  mixer: [['Soda',0],['Margarita',1],['Lime',0],['Pineapple',0]]
+};
+const sel = { spirit:'Tequila', brand:'Don Julio', mixer:'Soda' };
+function renderBuilder(){
+  document.querySelectorAll('.opts').forEach(g=>{
+    const grp = g.dataset.group; g.innerHTML='';
+    BUILDS[grp].forEach(([nm])=>{
+      const d = document.createElement('div');
+      d.className = 'opt'+(sel[grp]===nm?' sel':'');
+      d.textContent = nm;
+      d.onclick = ()=>{ sel[grp]=nm; renderBuilder(); };
+      g.appendChild(d);
+    });
+  });
+  const base = 10, sp = BUILDS.spirit.find(x=>x[0]===sel.spirit)[1], br = BUILDS.brand.find(x=>x[0]===sel.brand)[1], mx = BUILDS.mixer.find(x=>x[0]===sel.mixer)[1];
+  const price = base+sp+br+mx;
+  document.getElementById('b-line1').textContent = sel.brand+' '+(sel.spirit==='Tequila'?'Blanco':sel.spirit);
+  document.getElementById('b-line2').textContent = sel.mixer==='Soda'?'Soda water':sel.mixer;
+  document.getElementById('b-price').textContent = price.toFixed(2);
+  return price;
+}
+function addBuild(){
+  const price = renderBuilder();
+  cart.push([sel.brand+' · custom', price]);
+  updateCart(); openCheckout();
+}
+function openCheckout(){
+  const el = document.getElementById('cartlines');
+  el.innerHTML = '';
+  cart.forEach(([nm,pr])=>{ el.innerHTML += `<div class="linerow"><span class="l">${nm}</span><span class="r">$${pr.toFixed(2)}</span></div>`; });
+  const sub = cart.reduce((s,i)=>s+i[1],0), fee = cart.length?2:0, tax = sub*.0838;
+  el.innerHTML += `<div class="linerow"><span class="l" style="color:var(--dim);">Delivery to tee box</span><span class="r">$${fee.toFixed(2)}</span></div>`;
+  el.innerHTML += `<div class="linerow"><span class="l" style="color:var(--dim);">Tax</span><span class="r">$${tax.toFixed(2)}</span></div>`;
+  el.innerHTML += `<div class="linerow total"><span class="l">Total</span><span class="r">$${(sub+fee+tax).toFixed(2)}</span></div>`;
+  document.getElementById('paytotal').textContent = (sub+fee+tax).toFixed(2);
+  go('checkout','order');
+}
+let trackTimer = null;
+function pay(){
+  if (!cart.length) { cart=[['Transfusion',11],['Don Julio · custom',13]]; }
+  cart = []; updateCart();
+  go('tracking','activity');
+  let eta = 6, w = 35;
+  clearInterval(trackTimer);
+  trackTimer = setInterval(()=>{
+    eta = Math.max(0, eta-1); w = Math.min(100, w+11);
+    document.getElementById('eta').textContent = eta;
+    document.getElementById('pbar').style.width = w+'%';
+    if (eta===0){ clearInterval(trackTimer); document.getElementById('laststep').classList.add('done'); }
+  }, 1800);
+}
+function go(screen, tab){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s-'+screen).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
+  document.getElementById('cartbar').style.display = (cart.length && (screen==='menu'||screen==='home')) ? 'flex' : 'none';
+}
+renderCats(); renderMenu(); renderBuilder();
+const hash = location.hash.replace('#','');
+if (hash && document.getElementById('s-'+hash)) go(hash, {home:'map',menu:'order',builder:'order',checkout:'order',tracking:'activity',activity:'activity',account:'account'}[hash]||'map');
+if (hash==='checkout'){ cart=[['Transfusion',11],['Don Julio · custom',13]]; openCheckout(); }
+</script>
+</body>
+</html>

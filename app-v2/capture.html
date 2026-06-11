@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; }
+  body { background:#050505; width:918px; color:#fff; }
+  .sheet { padding:34px 36px 48px; }
+  h1 { text-align:center; font-size:30px; font-weight:800; letter-spacing:-.3px; }
+  .sub { text-align:center; font-size:14px; font-weight:700; letter-spacing:3px; color:#8a8a8a; margin-top:8px; }
+  .sub b { color:#3ddc6e; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:44px 42px; margin-top:38px; }
+  .col { display:flex; flex-direction:column; align-items:center; }
+  .label { font-size:13px; font-weight:700; letter-spacing:3px; color:#8a8a8a; margin-bottom:18px; }
+  .phone { width:392px; background:#101010; border:1px solid #2a2a2a; border-radius:52px; padding:12px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  .frame { border-radius:42px; overflow:hidden; height:846px; }
+  iframe { width:368px; height:846px; border:none; display:block; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <h1>Fairway Sips</h1>
+  <div class="sub">APP · DESIGN V2 · <b>LIVE INTERACTIVE DEMO</b></div>
+  <div class="grid">
+    <div class="col"><div class="label">HOME · LIVE MAP</div><div class="phone"><div class="frame"><iframe src="index.html?embed#home"></iframe></div></div></div>
+    <div class="col"><div class="label">MENU · COMPACT</div><div class="phone"><div class="frame"><iframe src="index.html?embed#menu"></iframe></div></div></div>
+    <div class="col"><div class="label">DRINK BUILDER</div><div class="phone"><div class="frame"><iframe src="index.html?embed#builder"></iframe></div></div></div>
+    <div class="col"><div class="label">CHECKOUT</div><div class="phone"><div class="frame"><iframe src="index.html?embed#checkout"></iframe></div></div></div>
+  </div>
+</div>
+</body>
+</html>
