@@ -143,6 +143,29 @@
         <div class="spacer"></div>
       </div>
 
+      <!-- COURSE PICKER -->
+      <div class="screen" id="s-picker">
+        <div class="header">
+          <div class="iconsq">⛳</div>
+          <div class="title">Pick your course</div>
+          <div class="chip">1 of 1</div>
+        </div>
+        <div style="font-size:13px;color:var(--dim);margin-top:6px;flex:none;">We'll load your live course map &amp; menu</div>
+        <div class="search">⌕&nbsp; Search 14,000+ courses…</div>
+        <div class="sec">📍 NEAR YOU</div>
+        <div class="card" style="border-color:rgba(61,220,110,.55);background:rgba(61,220,110,.07);">
+          <div class="menurow"><div class="em" style="background:rgba(61,220,110,.12);border-color:rgba(61,220,110,.3);">⛳</div><div><div class="nm">Siena Golf Club</div><div class="ds">Las Vegas, NV · 0.4 mi</div></div><div class="chip" style="margin-left:auto;"><span class="dot"></span>Live</div></div>
+        </div>
+        <div class="card" style="margin-top:10px;">
+          <div class="menurow"><div class="em">⛳</div><div><div class="nm">Rhodes Ranch GC</div><div class="ds">Las Vegas, NV · 2.1 mi</div></div><div class="chip" style="margin-left:auto;"><span class="dot" style="background:#3a3a3a;"></span>Soon</div></div>
+          <div class="menurow"><div class="em">⛳</div><div><div class="nm">TPC Las Vegas</div><div class="ds">Las Vegas, NV · 6.8 mi</div></div><div class="chip" style="margin-left:auto;"><span class="dot" style="background:#3a3a3a;"></span>Soon</div></div>
+          <div class="menurow"><div class="em">⛳</div><div><div class="nm">Bear's Best</div><div class="ds">Las Vegas, NV · 7.4 mi</div></div><div class="chip" style="margin-left:auto;"><span class="dot" style="background:#3a3a3a;"></span>Soon</div></div>
+        </div>
+        <div class="spacer"></div>
+        <div style="font-size:11.5px;color:var(--dim2);text-align:center;margin-bottom:10px;">Only live courses can take orders today</div>
+        <div class="pillbtn" style="margin-bottom:14px;" onclick="go('home','map')">Continue to Siena&nbsp;&nbsp;→</div>
+      </div>
+
       <!-- MENU -->
       <div class="screen" id="s-menu">
         <div class="bigtitle">Order<span style="margin-left:auto;" class="chip"><span class="dot"></span>Hole 7 · Live</span></div>
@@ -407,7 +430,7 @@ function go(screen, tab){
 }
 renderTiles(); renderMenu(); renderBuilder();
 const hash = location.hash.replace('#','');
-if (hash && document.getElementById('s-'+hash)) go(hash, {home:'map',menu:'order',builder:'order',checkout:'order',tracking:'activity',activity:'activity',account:'account'}[hash]||'map');
+if (hash && document.getElementById('s-'+hash)) go(hash, {home:'map',picker:'map',menu:'order',builder:'order',checkout:'order',tracking:'activity',activity:'activity',account:'account'}[hash]||'map');
 if (hash==='checkout'){ cart=[['Transfusion',11],['Don Julio · custom',13]]; openCheckout(); }
 </script>
 </body>

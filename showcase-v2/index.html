@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairway Sips — Showcase · Design v2</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; }
+  :root { --green:#3ddc6e; --bg:#050505; --card:#141414; --border:#262626; --dim:#8a8a8a; --dim2:#5c5c5c; }
+  body { background:var(--bg); color:#fff; }
+  .wrap { max-width:960px; margin:0 auto; padding:56px 20px 90px; }
+  h1 { font-size:36px; font-weight:800; letter-spacing:-.5px; text-align:center; }
+  .tag { color:var(--dim); font-size:15px; margin-top:10px; text-align:center; line-height:1.5; }
+  .tag b { color:var(--green); }
+  .toplinks { display:flex; gap:10px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
+  .toplinks a { font-size:13px; font-weight:700; color:#ddd; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:9px 16px; text-decoration:none; }
+  .toplinks a.primary { background:var(--green); color:#04230f; border-color:var(--green); }
+  h2.part { font-size:13px; font-weight:700; letter-spacing:3px; color:var(--dim); margin:70px 0 0; text-align:center; text-transform:uppercase; }
+  .entry { display:flex; gap:44px; align-items:center; margin-top:60px; }
+  .entry:nth-child(even of .entry) { flex-direction:row-reverse; }
+  .phone { width:330px; flex:none; background:#101010; border:1px solid #2a2a2a; border-radius:46px; padding:10px; box-shadow:0 26px 70px rgba(0,0,0,.55); }
+  .frame { border-radius:38px; overflow:hidden; height:712px; position:relative; }
+  .frame iframe { width:392px; height:846px; border:none; transform:scale(.7918); transform-origin:top left; display:block; pointer-events:auto; }
+  .txt { flex:1; min-width:0; }
+  .num { font-size:13px; font-weight:800; letter-spacing:2px; color:var(--green); }
+  .txt h3 { font-size:23px; font-weight:800; margin-top:8px; letter-spacing:-.2px; }
+  .txt ul { margin:14px 0 0 18px; display:flex; flex-direction:column; gap:9px; }
+  .txt li { font-size:14.5px; color:#cfcfcf; line-height:1.55; }
+  .txt li b { color:#fff; }
+  @media (max-width:760px) {
+    .entry, .entry:nth-child(even of .entry) { flex-direction:column; gap:22px; }
+    .txt { text-align:left; width:100%; max-width:430px; }
+  }
+  .foot { color:#3f3f3f; font-size:12.5px; margin-top:80px; text-align:center; line-height:1.7; }
+  .foot a { color:var(--dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⛳ Fairway Sips</h1>
+  <div class="tag">The full app in the <b>v2 design system</b> — every screen below is the <b>live interactive demo</b>, not a picture.<br>Tap and scroll inside the phones.</div>
+  <div class="toplinks">
+    <a class="primary" href="../app-v2/">Open the app full-screen →</a>
+    <a href="../">Everything hub</a>
+    <a href="../showcase/">Original showcase (v1)</a>
+  </div>
+
+  <h2 class="part">Part 1 · The Golfer</h2>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#picker" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">01</div><h3>Pick your course</h3><ul>
+      <li><b>GPS finds courses near you</b> — Siena GC shows as Live, ready to order.</li>
+      <li>Search across 14,000+ US courses for everyone else — the waitlist funnel.</li>
+      <li>One tap and the app is themed to your course for the rest of the round.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#home" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">02</div><h3>Home — the live course map</h3><ul>
+      <li><b>One dominant action:</b> "Order to my hole." Nothing competes with it.</li>
+      <li>Live runner positions with ETAs — golfers see the 4-minute promise before ordering.</li>
+      <li>Status chip reads like a heartbeat: runners on course, free now, ETA.</li>
+      <li>Quick reorder puts your usual one tap away.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#menu" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">03</div><h3>Menu — browse like Apple Music</h3><ul>
+      <li><b>Duotone category tiles</b> — Beer, Cocktails, Snacks, Non-Alcoholic — tap to filter.</li>
+      <li>Compact rows fit 8 items per screen; price and add button always visible.</li>
+      <li>"Most ordered" leads with what actually sells at this course.</li>
+      <li>Floating cart pill follows you — total always one glance away.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#builder" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">04</div><h3>Build your drink</h3><ul>
+      <li>Spirit → brand → mixer in three taps; <b>price updates live</b> with each choice.</li>
+      <li>"Your build" recipe card shows exactly what the runner pours.</li>
+      <li>Upsell is built in: premium brands carry their own price bumps.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#checkout" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">05</div><h3>Checkout</h3><ul>
+      <li>Flat <b>$2 delivery to your tee box</b> — visible, honest pricing.</li>
+      <li>GPS auto-delivery: the drop point moves with the golfer, no pin-dropping.</li>
+      <li>21+ ID verification promise right on the pay button — compliance as a feature.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#tracking" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">06</div><h3>Confirmed &amp; live tracking</h3><ul>
+      <li>Uber-style: <b>countdown ETA, progress bar, runner card</b> with rating.</li>
+      <li>Four-step status keeps golfers informed without them asking the cart girl "where's my drink."</li>
+      <li>Message the runner directly if plans change mid-hole.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#activity" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">07</div><h3>Activity — history &amp; one-tap reorder</h3><ul>
+      <li>Season stats up top: orders, average delivery, total spent.</li>
+      <li>Every past order is a <b>reorder button</b> — the repeat-purchase engine.</li>
+      <li>Today's live order sits first with its status.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/index.html?embed#account" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">08</div><h3>Account</h3><ul>
+      <li>ID verified once, badge forever — no re-carding every order.</li>
+      <li>Apple Pay default, home course, notifications, receipts.</li>
+    </ul></div>
+  </div>
+
+  <h2 class="part">Part 2 · The Staff</h2>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/staff.html?embed#queue" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">09</div><h3>Runner — queue</h3><ul>
+      <li>Uber-driver model: <b>incoming request with a 24-second accept window</b>.</li>
+      <li>Earnings, deliveries, and average time front and center — gamified hustle.</li>
+      <li>Active route stacks the next stops in order; restock alerts before they run dry.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/staff.html?embed#route" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">10</div><h3>Runner — route</h3><ul>
+      <li>Cart-path routing to the golfer's <b>live GPS position</b>, not a static hole number.</li>
+      <li>The order manifest rides along — what to pour before arriving.</li>
+      <li>One button state machine: Arrived → verify ID → complete.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/staff.html?embed#idcheck" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">11</div><h3>Runner — 21+ ID check</h3><ul>
+      <li>Three-item checklist, optional barcode scan auto-fills it.</li>
+      <li><b>Failed check protocol baked in:</b> alcohol returns, food still delivers, drink auto-refunds. No arguments at the tee box.</li>
+      <li>This screen is the liability armor the course's lawyers will ask about.</li>
+    </ul></div>
+  </div>
+
+  <div class="entry">
+    <div class="phone"><div class="frame"><iframe src="../app-v2/staff.html?embed#manager" loading="lazy"></iframe></div></div>
+    <div class="txt"><div class="num">12</div><h3>Manager — live dashboard</h3><ul>
+      <li>Revenue, order count, and delivery speed for the day at a glance.</li>
+      <li>Orders-by-hour chart shows the rush; runner board shows who's where.</li>
+      <li>Top seller with an <b>"86 it"</b> button — kill an item the moment it runs out.</li>
+    </ul></div>
+  </div>
+
+  <div class="foot">
+    Fairway Sips · Design v2 showcase · every phone above is the real demo<br>
+    <a href="../">← back to the everything hub</a>
+  </div>
+</div>
+</body>
+</html>
