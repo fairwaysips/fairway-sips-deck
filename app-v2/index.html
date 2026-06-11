@@ -74,10 +74,11 @@
   .menurow .pr { font-size:13.5px; font-weight:700; margin-left:auto; color:#ddd; }
   .addbtn { width:27px; height:27px; border-radius:8px; background:var(--card2); border:1px solid #2e2e2e; color:#ddd; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:600; cursor:pointer; flex:none; user-select:none; }
   .addbtn.added { background:var(--green); color:var(--greendark); border-color:var(--green); }
-  .cats { display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; flex:none; margin-top:14px; }
-  .cats::-webkit-scrollbar { display:none; }
-  .cat { font-size:12.5px; font-weight:700; color:#ccc; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:8px 15px; cursor:pointer; white-space:nowrap; user-select:none; }
-  .cat.active { background:#fff; color:#000; border-color:#fff; }
+  .tiles { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; flex:none; }
+  .tile { position:relative; border-radius:14px; height:84px; padding:10px 13px; display:flex; align-items:flex-end; font-weight:800; font-size:15px; cursor:pointer; overflow:hidden; border:1px solid rgba(255,255,255,.09); user-select:none; }
+  .tile .bigem { position:absolute; right:2px; top:0px; font-size:52px; opacity:.4; transform:rotate(14deg); }
+  .tile.sel { border-color:var(--green); box-shadow:0 0 0 1.5px var(--green); }
+  .bigtitle { font-size:28px; font-weight:800; letter-spacing:-.4px; margin-top:10px; flex:none; display:flex; align-items:center; }
   .search { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:12px 15px; color:var(--dim); font-size:13.5px; display:flex; gap:9px; align-items:center; margin-top:14px; flex:none; }
 
   /* floating cart bar */
@@ -144,14 +145,11 @@
 
       <!-- MENU -->
       <div class="screen" id="s-menu">
-        <div class="header">
-          <div class="iconsq">⛳</div>
-          <div class="title">Menu</div>
-          <div class="chip"><span class="dot"></span>Hole 7 · Live</div>
-        </div>
+        <div class="bigtitle">Order<span style="margin-left:auto;" class="chip"><span class="dot"></span>Hole 7 · Live</span></div>
         <div class="search">⌕&nbsp; Search drinks, snacks…</div>
-        <div class="cats" id="cats"></div>
-        <div class="card" style="margin-top:12px; flex:none;" id="menulist"></div>
+        <div class="tiles" id="tiles"></div>
+        <div class="sec" id="listlabel">MOST ORDERED</div>
+        <div class="card" style="flex:none;" id="menulist"></div>
         <div style="height:84px; flex:none;"></div>
       </div>
 
@@ -291,18 +289,31 @@ const MENU = {
 };
 let cart = [], activeCat = 'All';
 
-function renderCats(){
-  const el = document.getElementById('cats');
+const TILESTYLE = {
+  'Beer':      ['🍺','linear-gradient(140deg,#7a5012,#2e1d04)'],
+  'Cocktails': ['🍹','linear-gradient(140deg,#8c1d3f,#330a17)'],
+  'Snacks':    ['🌭','linear-gradient(140deg,#9a5212,#361b04)'],
+  'N/A':       ['💧','linear-gradient(140deg,#135c8c,#062236)']
+};
+function renderTiles(){
+  const el = document.getElementById('tiles');
   el.innerHTML = '';
-  Object.keys(MENU).forEach(c=>{
+  Object.keys(TILESTYLE).forEach(c=>{
+    const [em,bg] = TILESTYLE[c];
     const d = document.createElement('div');
-    d.className = 'cat'+(c===activeCat?' active':'');
-    d.textContent = c;
-    d.onclick = ()=>{ activeCat=c; renderCats(); renderMenu(); };
+    d.className = 'tile'+(c===activeCat?' sel':'');
+    d.style.background = bg;
+    d.innerHTML = `<span class="bigem">${em}</span>${c==='N/A'?'Non-Alcoholic':c}`;
+    d.onclick = ()=>{ activeCat = (activeCat===c?'All':c); renderTiles(); renderMenu(); };
     el.appendChild(d);
   });
+  const lbl = document.getElementById('listlabel');
+  if (lbl) lbl.textContent = activeCat==='All' ? 'MOST ORDERED' : activeCat.toUpperCase()+' · SIENA GC';
 }
-function items(){ return activeCat==='All' ? Object.values(MENU).filter(Boolean).flat() : MENU[activeCat]; }
+function items(){
+  if (activeCat==='All') return [MENU['Cocktails'][0], MENU['Beer'][0], MENU['Cocktails'][1], MENU['Snacks'][0], MENU['N/A'][1]];
+  return MENU[activeCat];
+}
 function renderMenu(){
   const el = document.getElementById('menulist');
   el.innerHTML = '';
@@ -394,7 +405,7 @@ function go(screen, tab){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
   document.getElementById('cartbar').style.display = (cart.length && (screen==='menu'||screen==='home')) ? 'flex' : 'none';
 }
-renderCats(); renderMenu(); renderBuilder();
+renderTiles(); renderMenu(); renderBuilder();
 const hash = location.hash.replace('#','');
 if (hash && document.getElementById('s-'+hash)) go(hash, {home:'map',menu:'order',builder:'order',checkout:'order',tracking:'activity',activity:'activity',account:'account'}[hash]||'map');
 if (hash==='checkout'){ cart=[['Transfusion',11],['Don Julio · custom',13]]; openCheckout(); }
