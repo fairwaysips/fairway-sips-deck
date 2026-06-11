@@ -250,12 +250,40 @@
         <div class="spacer"></div>
         <div class="homebar"></div>
       </div>
+<div class="stafftabs">
+  <div class="stab" data-s="queue" onclick="show('queue')"><span class="sti">📋</span>Queue</div>
+  <div class="stab" data-s="route" onclick="show('route')"><span class="sti">🛺</span>Route</div>
+  <div class="stab" data-s="idcheck" onclick="show('idcheck')"><span class="sti">🪪</span>ID Check</div>
+  <div class="stab" data-s="manager" onclick="show('manager')"><span class="sti">📊</span>Manager</div>
+</div>
 </div></div></div>
+<style>
+  .device { display:flex; flex-direction:column; }
+  .device > .screen { position:relative; inset:auto; flex:1; min-height:0; }
+  .stafftabs { display:flex; border-top:1px solid #1d1d1d; padding:10px 8px calc(10px + env(safe-area-inset-bottom)); background:var(--screen); flex:none; }
+  .stab { flex:1; text-align:center; color:var(--dim2); font-size:11px; font-weight:600; cursor:pointer; user-select:none; }
+  .stab .sti { font-size:19px; display:block; margin-bottom:3px; filter:grayscale(1) brightness(.7); }
+  .stab.active { color:var(--green); }
+  .stab.active .sti { filter:none; }
+</style>
 <script>
 if (location.search.includes('embed')) document.body.classList.add('embed');
-const h = location.hash.replace('#','') || 'queue';
-const el = document.getElementById('s-'+h) || document.getElementById('s-queue');
-el.classList.add('active');
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  document.querySelectorAll('.stab').forEach(t=>t.classList.toggle('active', t.dataset.s===id));
+}
+show((document.getElementById('s-'+location.hash.replace('#','')) ? location.hash.replace('#','') : 'queue'));
+// wire the flow buttons: accept → route → ID check → back to queue
+const wire = (screen, sel, target) => {
+  const el = document.querySelector('#s-'+screen+' '+sel);
+  if (el) { el.style.cursor='pointer'; el.onclick = ()=>show(target); }
+};
+wire('queue','.pillbtn','route');
+wire('route','.pillbtn','idcheck');
+wire('idcheck','.pillbtn','queue');
+wire('idcheck','.back','route');
+wire('route','.back','queue');
 </script>
 </body>
 </html>
