@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairway Sips — Studio</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; }
+  :root { --green:#3ddc6e; --bg:#050505; --card:#141414; --card2:#1c1c1c; --border:#262626; --dim:#8a8a8a; --gold:#f5b942; }
+  body { background:var(--bg); color:#fff; min-height:100vh; }
+  .wrap { max-width:980px; margin:0 auto; padding:48px 20px 80px; }
+  .back { color:var(--dim); text-decoration:none; font-size:13.5px; }
+  .back:hover { color:var(--green); }
+  h1 { font-size:34px; font-weight:800; letter-spacing:-.4px; margin-top:14px; }
+  .tag { color:var(--dim); font-size:15px; margin-top:8px; line-height:1.5; }
+  .tag b { color:var(--green); }
+  .shot { margin-top:44px; }
+  .shot-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .shot-num { font-size:12px; font-weight:700; letter-spacing:2.4px; color:var(--green); text-transform:uppercase; }
+  .shot-title { font-size:21px; font-weight:800; letter-spacing:-.2px; }
+  .shot-desc { color:var(--dim); font-size:13.5px; margin-top:6px; line-height:1.5; max-width:640px; }
+  .takes { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:16px; }
+  .take { background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden; }
+  .take video { width:100%; aspect-ratio:16/9; display:block; background:#000; }
+  .take-bar { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .take-model { font-size:14px; font-weight:700; }
+  .take-note { font-size:12px; color:var(--dim); margin-top:2px; line-height:1.4; }
+  .pick { font-size:10.5px; font-weight:800; letter-spacing:1px; padding:3px 9px; border-radius:99px; background:rgba(245,185,66,.12); color:var(--gold); border:1px solid rgba(245,185,66,.4); flex:none; }
+  .dl { margin-left:auto; flex:none; font-size:12px; font-weight:700; color:var(--green); text-decoration:none; border:1px solid rgba(61,220,110,.4); border-radius:99px; padding:5px 12px; }
+  .dl:hover { background:rgba(61,220,110,.12); }
+  .status { display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:99px; margin-left:6px; vertical-align:2px; background:var(--card2); color:var(--dim); border:1px solid var(--border); }
+  .status.review { background:rgba(61,220,110,.15); color:var(--green); border-color:rgba(61,220,110,.4); }
+  .upnext { margin-top:48px; background:var(--card); border:1px dashed var(--border); border-radius:18px; padding:20px 22px; }
+  .upnext h3 { font-size:13px; font-weight:700; letter-spacing:2.4px; color:var(--dim); text-transform:uppercase; margin-bottom:12px; }
+  .upnext li { color:var(--dim); font-size:14px; line-height:2; list-style:none; }
+  .upnext li::before { content:"○ "; color:var(--green); }
+  .foot { color:#3f3f3f; font-size:12.5px; margin-top:48px; text-align:center; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← Back to hub</a>
+  <h1>🎬 Studio</h1>
+  <div class="tag">Commercial production dailies — every shot, every model take, full quality.<br>Review here, then text the verdict: <b>"shot 1, Sora wins"</b> — that's it.</div>
+
+  <div class="shot">
+    <div class="shot-head">
+      <span class="shot-num">Shot 01</span>
+      <span class="shot-title">Cold Open — dawn fairway</span>
+      <span class="status review">in review</span>
+    </div>
+    <div class="shot-desc">Drone push over the fairway at golden hour. Lone golfer checks his phone. Sets the silence before the spot kicks in.</div>
+    <div class="takes">
+      <div class="take">
+        <video controls preload="none" poster="media/frame-sora2.jpg" src="media/coldopen-sora2.mp4"></video>
+        <div class="take-bar">
+          <div><div class="take-model">Sora 2</div><div class="take-note">Misty silhouette, footprints in dew — most cinematic</div></div>
+          <span class="pick">★ Director's pick</span>
+          <a class="dl" href="media/coldopen-sora2.mp4" download>Master</a>
+        </div>
+      </div>
+      <div class="take">
+        <video controls preload="none" poster="media/frame-kling25.jpg" src="media/coldopen-kling25.mp4"></video>
+        <div class="take-bar">
+          <div><div class="take-model">Kling 2.5 Pro</div><div class="take-note">Epic valley fog, golfer small in frame</div></div>
+          <a class="dl" href="media/coldopen-kling25.mp4" download>Master</a>
+        </div>
+      </div>
+      <div class="take">
+        <video controls preload="none" poster="media/frame-veo31.jpg" src="media/coldopen-veo31.mp4"></video>
+        <div class="take-bar">
+          <div><div class="take-model">Veo 3.1</div><div class="take-note">Sharpest detail, centered framing</div></div>
+          <a class="dl" href="media/coldopen-veo31.mp4" download>Master</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="upnext">
+    <h3>Up next on the shot list</h3>
+    <ul>
+      <li>Shot 02 — The order: thumb taps "Transfusion" on the real v2 UI (phone-in-hand, Seedance + ref images)</li>
+      <li>Shot 03 — The run: beverage cart tearing down the cart path, golden light</li>
+      <li>Shot 04 — The handoff: runner hands an ice-cold drink at the tee box</li>
+      <li>Shot 05 — The moment: foursome toasts, one sinks the putt</li>
+      <li>Final — full edit: beat-cut montage, VO, score, end card</li>
+    </ul>
+  </div>
+
+  <div class="foot">Fairway Sips · internal production review · takes render on fal.ai (Veo · Sora · Kling · Seedance)<br>Masters are full resolution — tap any take to play, Download for the original file.</div>
+</div>
+</body>
+</html>
