@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Fairway Sips mark: flagstick-as-straw in a highball glass -->
+  <defs>
+    <linearGradient id="liq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3ddc6e"/>
+      <stop offset="1" stop-color="#1fa04e"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="#0b0f0c"/>
+  <!-- liquid -->
+  <path d="M42 62 H78 V88 Q78 94 72 94 H48 Q42 94 42 88 Z" fill="url(#liq)"/>
+  <!-- bubbles -->
+  <circle cx="52" cy="74" r="2.6" fill="#0b0f0c" opacity=".55"/>
+  <circle cx="62" cy="82" r="2" fill="#0b0f0c" opacity=".55"/>
+  <circle cx="69" cy="70" r="1.7" fill="#0b0f0c" opacity=".55"/>
+  <!-- glass -->
+  <path d="M40 46 H80 V87 Q80 96 71 96 H49 Q40 96 40 87 Z"
+        fill="none" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+  <!-- flagstick / straw -->
+  <path d="M73 18 L64 66" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+  <!-- pennant -->
+  <path d="M73 18 L46 24.5 L70.5 32 Z" fill="#3ddc6e"/>
+</svg>

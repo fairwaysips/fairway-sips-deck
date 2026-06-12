@@ -49,9 +49,10 @@
   /* tab bar */
   .tabs { display:flex; border-top:1px solid #1d1d1d; padding:10px 8px calc(10px + env(safe-area-inset-bottom)); flex:none; background:var(--screen); }
   .tab { flex:1; text-align:center; color:var(--dim2); font-size:11px; font-weight:600; position:relative; cursor:pointer; }
-  .tab .ti { font-size:19px; display:block; margin-bottom:3px; filter:grayscale(1) brightness(.7); }
+  .tab .ti { display:block; margin:0 auto 4px; width:22px; height:22px; }
+  .tab .ti svg { width:22px; height:22px; display:block; }
   .tab.active { color:var(--green); }
-  .tab.active .ti { filter:none; }
+  
 
   /* map */
   .map { border-radius:20px; background:
@@ -164,7 +165,7 @@
       <!-- HOME -->
       <div class="screen active" id="s-home">
         <div class="header">
-          <div class="iconsq">⛳</div>
+          <img src="../brand/logo.svg" style="width:30px;height:30px;border-radius:9px;flex:none;" alt="">
           <div class="title">Fairway Sips</div>
           <div class="chip"><span class="dot"></span>Hole 7</div>
         </div>
@@ -190,7 +191,7 @@
       <!-- COURSE PICKER -->
       <div class="screen" id="s-picker">
         <div class="header">
-          <div class="iconsq">⛳</div>
+          <img src="../brand/logo.svg" style="width:30px;height:30px;border-radius:9px;flex:none;" alt="">
           <div class="title">Pick your course</div>
           <div class="chip">1 of 1</div>
         </div>
@@ -288,7 +289,7 @@
       <!-- ACTIVITY -->
       <div class="screen" id="s-activity">
         <div class="header">
-          <div class="iconsq">⛳</div>
+          <img src="../brand/logo.svg" style="width:30px;height:30px;border-radius:9px;flex:none;" alt="">
           <div class="title">Activity</div>
           <div class="chip"><span class="dot"></span>Hole 7</div>
         </div>
@@ -313,7 +314,7 @@
       <!-- ACCOUNT -->
       <div class="screen" id="s-account">
         <div class="header">
-          <div class="iconsq">👤</div>
+          <img src="../brand/logo.svg" style="width:30px;height:30px;border-radius:9px;flex:none;" alt="">
           <div class="title">Account</div>
           <div class="chip">Siena GC</div>
         </div>
@@ -365,10 +366,10 @@
     </div>
 
     <div class="tabs">
-      <div class="tab active" data-tab="map" onclick="go('home','map')"><span class="ti">🗺️</span>Map</div>
-      <div class="tab" data-tab="order" onclick="go('menu','order')"><span class="ti">🍺</span>Order</div>
-      <div class="tab" data-tab="activity" onclick="go('activity','activity')"><span class="ti">🔔</span>Activity</div>
-      <div class="tab" data-tab="account" onclick="go('account','account')"><span class="ti">👤</span>Account</div>
+      <div class="tab active" data-tab="map" onclick="go('home','map')"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.1-7-11a7 7 0 0 1 14 0c0 5.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>Map</div>
+      <div class="tab" data-tab="order" onclick="go('menu','order')"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12l-1.2 14a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 5Z"/><path d="M6.6 11h10.8"/><path d="M15 5l2.5-3"/></svg></span>Order</div>
+      <div class="tab" data-tab="activity" onclick="go('activity','activity')"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 0 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9Z"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg></span>Activity</div>
+      <div class="tab" data-tab="account" onclick="go('account','account')"><span class="ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span>Account</div>
     </div>
   </div></div>
   <div class="shell-note">TAP AROUND — IT WORKS</div>
