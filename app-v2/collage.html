@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; }
+  body { width:1640px; height:1060px; overflow:hidden; position:relative;
+         background:#edf6ee; }
+  /* decorative blobs */
+  .blob { position:absolute; border-radius:50%; background:#d7eedb; }
+  .blob.dark { background:#c4e6cb; }
+  .garnish { position:absolute; font-size:74px; filter:drop-shadow(0 14px 18px rgba(20,60,30,.25)); }
+  /* phone */
+  .ph { position:absolute; width:243px; }
+  .frame { width:416px; background:#101010; border:1px solid #2a2a2a; border-radius:52px; padding:12px;
+           box-shadow:0 36px 70px rgba(15,45,25,.35); transform:scale(.555); transform-origin:top left; }
+  .scr { border-radius:42px; overflow:hidden; height:846px; background:#0b0b0b; }
+  iframe { width:392px; height:846px; border:none; display:block; }
+  /* splash phone content */
+  .splash { height:846px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+            background:radial-gradient(420px 320px at 70% 20%, rgba(61,220,110,.35), transparent 70%),
+                       radial-gradient(380px 300px at 25% 80%, rgba(61,220,110,.28), transparent 70%),
+                       linear-gradient(165deg, #0f7a3d, #074d24 65%, #053a1b); }
+  .splash .logo { width:108px; height:108px; border-radius:30px; background:rgba(255,255,255,.14);
+                  border:1px solid rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:58px; }
+  .splash .nm { font-size:34px; font-weight:800; color:#fff; letter-spacing:-.4px; }
+  .splash .tg { font-size:15px; font-weight:600; color:rgba(255,255,255,.75); }
+  .splash .pill { margin-top:16px; background:#fff; color:#074d24; font-weight:800; font-size:15px; padding:13px 30px; border-radius:999px; }
+</style>
+</head>
+<body>
+  <!-- background decoration -->
+  <div class="blob" style="width:230px;height:230px;left:-60px;top:-70px;"></div>
+  <div class="blob dark" style="width:90px;height:90px;left:300px;top:60px;"></div>
+  <div class="blob" style="width:150px;height:150px;right:120px;top:-40px;"></div>
+  <div class="blob dark" style="width:60px;height:60px;right:60px;top:240px;"></div>
+  <div class="blob" style="width:260px;height:260px;right:-90px;bottom:-80px;"></div>
+  <div class="blob dark" style="width:110px;height:110px;left:120px;bottom:90px;"></div>
+  <div class="blob" style="width:70px;height:70px;left:640px;top:-20px;"></div>
+  <div class="blob dark" style="width:50px;height:50px;left:1050px;bottom:50px;"></div>
+  <div class="garnish" style="left:90px;top:170px;transform:rotate(-14deg);">🍋</div>
+  <div class="garnish" style="left:215px;top:300px;font-size:56px;transform:rotate(10deg);">🥝</div>
+  <div class="garnish" style="right:150px;top:120px;transform:rotate(12deg);">🍊</div>
+  <div class="garnish" style="right:80px;bottom:140px;font-size:62px;transform:rotate(-8deg);">⛳</div>
+  <div class="garnish" style="left:60px;bottom:230px;font-size:58px;transform:rotate(6deg);">🍺</div>
+
+  <!-- phones, staggered like the reference -->
+  <div class="ph" style="left:120px; top:300px;">
+    <div class="frame"><div class="scr"><iframe src="index.html?embed#activity" loading="eager"></iframe></div></div>
+  </div>
+  <div class="ph" style="left:355px; top:60px; z-index:3;">
+    <div class="frame"><div class="scr">
+      <div class="splash">
+        <div class="logo">⛳</div>
+        <div class="nm">Fairway Sips</div>
+        <div class="tg">Drinks delivered to your hole</div>
+        <div class="pill">Order in. We'll find you.</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="ph" style="left:590px; top:380px; z-index:2;">
+    <div class="frame"><div class="scr"><iframe src="index.html?embed#builder" loading="eager"></iframe></div></div>
+  </div>
+  <div class="ph" style="left:825px; top:90px;">
+    <div class="frame"><div class="scr"><iframe src="index.html?embed#menu" loading="eager"></iframe></div></div>
+  </div>
+  <div class="ph" style="left:1060px; top:420px;">
+    <div class="frame"><div class="scr"><iframe src="index.html?embed#tracking" loading="eager"></iframe></div></div>
+  </div>
+  <div class="ph" style="left:1295px; top:140px;">
+    <div class="frame"><div class="scr"><iframe src="index.html?embed#checkout" loading="eager"></iframe></div></div>
+  </div>
+</body>
+</html>
