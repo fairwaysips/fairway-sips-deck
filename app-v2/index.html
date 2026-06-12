@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fairway Sips — Design v2 Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif; -webkit-tap-highlight-color:transparent; }
   :root { --green:#3ddc6e; --greendark:#04230f; --bg:#050505; --screen:#0b0b0b; --card:#161616; --card2:#1c1c1c; --border:#262626; --dim:#8a8a8a; --dim2:#5c5c5c; --amber:#f5b942; }
@@ -78,7 +81,48 @@
   .tile { position:relative; border-radius:14px; height:84px; padding:10px 13px; display:flex; align-items:flex-end; font-weight:800; font-size:15px; cursor:pointer; overflow:hidden; border:1px solid rgba(255,255,255,.09); user-select:none; }
   .tile .bigem { position:absolute; right:2px; top:0px; font-size:52px; opacity:.4; transform:rotate(14deg); }
   .tile.sel { border-color:var(--green); box-shadow:0 0 0 1.5px var(--green); }
-  .bigtitle { font-size:28px; font-weight:800; letter-spacing:-.4px; margin-top:10px; flex:none; display:flex; align-items:center; }
+  .bigtitle { font-family:'Space Grotesk',sans-serif; font-size:29px; font-weight:700; letter-spacing:-.6px; margin-top:10px; flex:none; display:flex; align-items:center; }
+  .title, .tile, .rname { font-family:'Space Grotesk',sans-serif; }
+
+  /* ---- item detail pop-up ---- */
+  .detail { position:absolute; inset:0; z-index:40; background:var(--screen); display:none; flex-direction:column;
+            transform:translateY(24px); opacity:0; transition:transform .28s cubic-bezier(.2,.9,.3,1), opacity .2s; }
+  .detail.open { display:flex; }
+  .detail.in { transform:translateY(0); opacity:1; }
+  .hero { height:340px; flex:none; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .hero .wash { position:absolute; inset:0; }
+  .hero .ring { position:absolute; border-radius:50%; border:1.5px solid rgba(255,255,255,.10); }
+  .hero .art { font-size:148px; filter:drop-shadow(0 26px 32px rgba(0,0,0,.55)); transform:rotate(-6deg); position:relative; }
+  .hero .close { position:absolute; top:18px; left:18px; width:38px; height:38px; border-radius:50%;
+                 background:rgba(0,0,0,.45); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.18);
+                 color:#fff; display:flex; align-items:center; justify-content:center; font-size:17px; cursor:pointer; }
+  .hero .fav { position:absolute; top:18px; right:18px; width:38px; height:38px; border-radius:50%;
+               background:rgba(0,0,0,.45); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.18);
+               display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .detail .body { flex:1; overflow-y:auto; padding:24px 22px 16px; margin-top:-26px; position:relative;
+                  background:var(--screen); border-radius:28px 28px 0 0; scrollbar-width:none; }
+  .detail .body::-webkit-scrollbar { display:none; }
+  .dname { font-family:'Space Grotesk',sans-serif; font-size:27px; font-weight:700; letter-spacing:-.5px; }
+  .dsub { font-size:14px; color:var(--dim); margin-top:6px; line-height:1.5; }
+  .metas { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .meta { font-size:12.5px; font-weight:700; color:#ddd; background:var(--card); border:1px solid var(--border);
+          border-radius:999px; padding:8px 13px; display:flex; gap:6px; align-items:center; }
+  .meta b { color:var(--green); }
+  .sizes { display:flex; gap:9px; margin-top:12px; }
+  .size { flex:1; text-align:center; padding:13px 6px; border-radius:16px; background:var(--card); border:1.5px solid var(--border);
+          cursor:pointer; user-select:none; }
+  .size .sz { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+  .size .sp { font-size:11.5px; color:var(--dim); margin-top:3px; }
+  .size.sel { border-color:var(--green); background:rgba(61,220,110,.08); }
+  .size.sel .sz { color:var(--green); }
+  .dbar { flex:none; display:flex; gap:12px; align-items:center; padding:14px 20px calc(16px + env(safe-area-inset-bottom));
+          border-top:1px solid #1d1d1d; background:var(--screen); }
+  .qty { display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--border);
+         border-radius:999px; padding:11px 16px; }
+  .qty span { font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; min-width:14px; text-align:center; }
+  .qty .qbtn { font-size:18px; color:#ddd; cursor:pointer; user-select:none; width:18px; text-align:center; }
+  .dadd { flex:1; background:var(--green); color:var(--greendark); font-family:'Space Grotesk',sans-serif;
+          font-size:16px; font-weight:700; border-radius:999px; padding:16px; text-align:center; cursor:pointer; user-select:none; }
   .search { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:12px 15px; color:var(--dim); font-size:13.5px; display:flex; gap:9px; align-items:center; margin-top:14px; flex:none; }
 
   /* floating cart bar */
@@ -290,6 +334,32 @@
         <div class="spacer"></div>
       </div>
 
+      <!-- item detail pop-up -->
+      <div class="detail" id="detail">
+        <div class="hero" id="dhero">
+          <div class="wash" id="dwash"></div>
+          <div class="ring" style="width:300px;height:300px;left:-80px;top:-90px;"></div>
+          <div class="ring" style="width:200px;height:200px;right:-50px;bottom:-40px;"></div>
+          <div class="art" id="dart">🍹</div>
+          <div class="close" onclick="closeDetail()">✕</div>
+          <div class="fav">🤍</div>
+        </div>
+        <div class="body">
+          <div class="dname" id="dname">Transfusion</div>
+          <div class="dsub" id="ddesc">Vodka, grape juice, ginger ale, fresh lime — the course classic.</div>
+          <div class="metas" id="dmetas"></div>
+          <div class="sec">SIZE</div>
+          <div class="sizes" id="dsizes"></div>
+          <div class="sec">GOOD TO KNOW</div>
+          <div class="dsub" style="margin-top:0;">Made fresh on the beverage cart and delivered cold to your tee box in ~4 minutes. 21+ ID checked at handoff.</div>
+          <div style="height:10px;"></div>
+        </div>
+        <div class="dbar">
+          <div class="qty"><div class="qbtn" onclick="dqty(-1)">−</div><span id="dq">1</span><div class="qbtn" onclick="dqty(1)">+</div></div>
+          <div class="dadd" onclick="addDetail()">Add to cart · $<span id="dprice">11.00</span></div>
+        </div>
+      </div>
+
       <!-- floating cart -->
       <div class="cartbar" id="cartbar" onclick="openCheckout()"><div class="ct" id="cartcount">0</div>View cart<div class="tt">$<span id="carttotal">0.00</span></div></div>
     </div>
@@ -351,13 +421,84 @@ function renderMenu(){
   el.appendChild(build);
   items().forEach(([em,nm,ds,pr])=>{
     const d = document.createElement('div');
-    d.className='menurow';
+    d.className='menurow'; d.style.cursor='pointer';
     d.innerHTML = `<div class="em">${em}</div><div><div class="nm">${nm}</div><div class="ds">${ds}</div></div><div class="pr">$${pr}</div>`;
     const a = document.createElement('div'); a.className='addbtn'; a.textContent='+';
-    a.onclick = ()=>addItem(a,nm,pr);
+    a.onclick = (e)=>{ e.stopPropagation(); addItem(a,nm,pr); };
+    d.onclick = ()=>openDetail(em,nm,ds,pr);
     d.appendChild(a);
     el.appendChild(d);
   });
+}
+
+/* ---- item detail ---- */
+const CATWASH = {
+  'Beer':      'radial-gradient(260px 200px at 70% 25%, rgba(245,185,66,.45), transparent 70%), linear-gradient(160deg,#7a5012,#241603)',
+  'Cocktails': 'radial-gradient(260px 200px at 70% 25%, rgba(255,90,130,.4), transparent 70%), linear-gradient(160deg,#8c1d3f,#270a14)',
+  'Snacks':    'radial-gradient(260px 200px at 70% 25%, rgba(245,150,66,.42), transparent 70%), linear-gradient(160deg,#9a5212,#2a1503)',
+  'N/A':       'radial-gradient(260px 200px at 70% 25%, rgba(90,180,255,.4), transparent 70%), linear-gradient(160deg,#135c8c,#04141f)'
+};
+const SIZES = {
+  'Beer':      [['12oz',0],['16oz',2],['24oz',4]],
+  'Cocktails': [['Single',0],['Double',3],['Pitcher',14]],
+  'Snacks':    [['Regular',0],['Loaded',3]],
+  'N/A':       [['Bottle',0],['Large',2]]
+};
+const DESCRIPTIONS = {
+  'Transfusion':"Vodka, grape juice, ginger ale, fresh lime — the course classic.",
+  "Tito's & Soda":"Tito's Handmade, soda water, double pour, fresh lime.",
+  'Margarita':"House tequila, triple sec, fresh lime, salted rim, on the rocks.",
+  'John Daly':"Spiked Arnold Palmer — sweet tea vodka, lemonade, iced.",
+  'Bud Light':"Ice cold 12oz can, pulled from the cart cooler at order time.",
+  'Corona':"12oz bottle with a lime wedge, beach energy on the back nine.",
+  'Truly Wild Berry':"Hard seltzer, 5% — crisp, light, dangerously walkable.",
+  'Michelob Ultra':"The runner's choice — light lager for all 18.",
+  'Turn Dog':"All-beef dog grilled at the turn, mustard/ketchup/relish on the side.",
+  'Chips':"Kettle-cooked, sea salt.", 'Trail Mix':"Sweet & salty, real fuel.",
+  'Water':"Ice cold bottle. Hydrate or die-drate.", 'Gatorade':"Lemon-lime, cooler-cold.", 'Red Bull':"8.4oz wings for the back nine."
+};
+function catOf(name){ for (const c of Object.keys(MENU)) { if (c!=='All' && MENU[c] && MENU[c].some(i=>i[1]===name)) return c; } return 'Cocktails'; }
+let dItem = null, dQty = 1, dSize = 0;
+function openDetail(em,nm,ds,pr){
+  const cat = catOf(nm);
+  dItem = {em,nm,pr,cat}; dQty = 1; dSize = 0;
+  document.getElementById('dart').textContent = em;
+  document.getElementById('dwash').style.background = CATWASH[cat];
+  document.getElementById('dname').textContent = nm;
+  document.getElementById('ddesc').textContent = DESCRIPTIONS[nm] || ds;
+  document.getElementById('dmetas').innerHTML =
+    `<div class="meta">★ <b>4.8</b> rating</div><div class="meta">⚡ <b>~4 min</b> to your hole</div><div class="meta">${cat==='Snacks'||cat==='N/A' ? '✅ <b>no ID</b> needed' : '🪪 <b>21+</b> ID at handoff'}</div>`;
+  renderSizes();
+  const el = document.getElementById('detail');
+  el.classList.add('open'); requestAnimationFrame(()=>el.classList.add('in'));
+}
+function renderSizes(){
+  const wrap = document.getElementById('dsizes');
+  wrap.innerHTML = '';
+  SIZES[dItem.cat].forEach(([label,delta],i)=>{
+    const s = document.createElement('div');
+    s.className = 'size'+(i===dSize?' sel':'');
+    s.innerHTML = `<div class="sz">${label}</div><div class="sp">${delta?'+$'+delta:'included'}</div>`;
+    s.onclick = ()=>{ dSize=i; renderSizes(); };
+    wrap.appendChild(s);
+  });
+  updDetailPrice();
+}
+function updDetailPrice(){
+  const p = (dItem.pr + SIZES[dItem.cat][dSize][1]) * dQty;
+  document.getElementById('dq').textContent = dQty;
+  document.getElementById('dprice').textContent = p.toFixed(2);
+}
+function dqty(n){ dQty = Math.max(1, dQty+n); updDetailPrice(); }
+function addDetail(){
+  const sz = SIZES[dItem.cat][dSize];
+  for (let i=0;i<dQty;i++) cart.push([dItem.nm + (sz[1]?' · '+sz[0]:''), dItem.pr + sz[1]]);
+  updateCart(); closeDetail();
+  document.getElementById('cartbar').style.display = 'flex';
+}
+function closeDetail(){
+  const el = document.getElementById('detail');
+  el.classList.remove('in'); setTimeout(()=>el.classList.remove('open'), 220);
 }
 function addItem(btn,name,price){
   cart.push([name,price]);
@@ -436,6 +577,7 @@ renderTiles(); renderMenu(); renderBuilder();
 const hash = location.hash.replace('#','');
 if (hash && document.getElementById('s-'+hash)) go(hash, {home:'map',picker:'map',menu:'order',builder:'order',checkout:'order',tracking:'activity',activity:'activity',account:'account'}[hash]||'map');
 if (hash==='checkout'){ cart=[['Transfusion',11],['Don Julio · custom',13]]; openCheckout(); }
+if (hash==='detail'){ go('menu','order'); openDetail('🍹','Transfusion','The course classic',11); }
 </script>
 </body>
 </html>
